@@ -1,0 +1,65 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #09d3ac;
+}
+
+.TextField {
+  background: #fff;
+  display: block;
+  color: #444;
+  font-family: 'Courier New', Courier, monospace;
+  padding: 20px;
+  height: 200px;
+  font-size: 36px;
+  text-align: right;
+}
+
+body {
+
+}
+
+.Calculator {
+  width: 250px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
+}
+
+.Button {
+  text-align: center;
+  font-size: 3.5em;
+  height: 70px;
+  width: 70px;
+  background: #5f4bb6;
+  color: #fff;
+  border: 1px solid white;
+}
+
+.Button [type = "numeric"] {
+  background: #222;
+}
+
+.Button [type = "equals"] {
+  background: #ffc207;
+}
+
+.Button [type="binaryOp"] {
+  background: #5f4bb6;
+}
