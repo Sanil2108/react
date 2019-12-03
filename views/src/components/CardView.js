@@ -20,6 +20,8 @@ export default class CardView extends React.Component {
                     "position": "relative"
                 }}
             >
+                {/* <img  */}
+                <div className={"FadeGradient"}></div>
                 {this.props.children}
             </div>
         )

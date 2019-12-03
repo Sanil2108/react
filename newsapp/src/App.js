@@ -15,9 +15,6 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <SearchContainer searchFunction={this.searchFunction.bind(this)}>
-  
-        </SearchContainer>
         <NewsContainer>
   
         </NewsContainer>
