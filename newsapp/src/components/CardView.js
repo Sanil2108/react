@@ -27,7 +27,7 @@ export default class CardView extends React.Component {
     }
 
     startLoading() {
-        if (!this.state.loadingToShowNews) {
+        if (!this.state.loadingToShowNews && this.state.shrunk) {
             console.log("Starting loading", this.state.loadingToShowNews)
             this.setState({
                 loadingToShowNews: true,
@@ -43,6 +43,10 @@ export default class CardView extends React.Component {
                 loadingToHideNews: true,
             });
         }
+
+        if (!this.state.shrunk) {
+            this.setState({decreasingHeight: true,})
+        }
     }
 
     removeLoadingIfOnCloseButton(event) {
@@ -51,14 +55,28 @@ export default class CardView extends React.Component {
         }
     }
 
+    animationEnd() {
+        this.setState({
+            shrunk: false,
+        });
+    }
+
     render() {
+        let animationName = "";
+        if (this.state.increasingHeight) {
+            animationName = "cardview_expand";
+        }
+        if (this.state.decreasingHeight) {
+            animationName = "cardview_shrink";
+        }
         return (
             <div>
                 <div
                     onMouseOver={this.startLoading.bind(this)} onMouseLeave={this.stopLoading.bind(this)} onMouseMove={this.removeLoadingIfOnCloseButton.bind(this)}
                     className={"CardView CardView_shrunk"}
+                    onAnimationEnd={this.animationEnd.bind(this)}
                     style={{
-                        "animation-name": (this.state.increasingHeight) ? "cardview_expand" : "",
+                        "animationName": animationName,
                         "width": (this.props.width !== undefined) ? this.props.width : this.state.defaultWidth+"%",
                         "left": (this.props.centerAlign) ? (50 - this.state.defaultWidth / 2) + "%" : "0",
                         "position": "relative"
@@ -77,6 +95,23 @@ export default class CardView extends React.Component {
                         loading={this.state.loadingToShowNews}
                         loadingFinished={this.newsLoadingFinished.bind(this)}
                     ></LoadingBar>
+
+                    <p style={{
+                        "visibility": (this.state.shrunk) ? "hidden" : "visible",
+                        "position": (this.state.shrunk) ? "fixed" : "relative",
+                    }}>
+                    "Rs 4.71 lakh crore debt" on the state. Patil's comments came two days after Chief Minister Uddhav Thackeray ordered a review of all on-going development projects in the state, including the Mumbai-Ahmedabad bullet train.
+
+"The state's debt is Rs 4.71 lakh crore. The debt for ongoing projects is Rs two lakh crore. We are reviewing which projects are important for the state's development and whether projects like bullet train can be taken up at a later stage," Patil told a television channel.
+
+"We have called a meeting to look into the viability of the project and how much money will the state government need to repay," he said.
+
+The bullet train project has faced stiff opposition from farmers and tribals whose lands are to be acquired.
+
+Patil also said that people were "not happy" with the previous government's loan waiver scheme.
+
+"We are working on how to provide relief to farmers affected by unseasonal rains and floods," he added.
+                    </p>
 
 
                     <div className="child" onClick={()=>{window.open(this.props.url, '_blank')}}>
