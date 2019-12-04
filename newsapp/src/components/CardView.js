@@ -13,6 +13,7 @@ export default class CardView extends React.Component {
             loadingToHideNews: false,
             shrunk: true,
             currentHeight: this.props.height,
+            leaving: false,
         }
     }
 
@@ -55,10 +56,41 @@ export default class CardView extends React.Component {
         }
     }
 
-    animationEnd() {
+    animationEnd(event) {
+        switch(event.animationName) {
+            case "cardview_expand":
+                this.setState({
+                    shrunk: false,
+                    loadingToShowNews: false,
+                    loadingToHideNews: false,
+                    increasingHeight: false,
+                    decreasingHeight: false,
+                });
+                break;
+
+            case 'cardview_shrink':
+                this.setState({
+                    shrunk: true,
+                    loadingToShowNews: false,
+                    loadingToHideNews: false,
+                    increasingHeight: false,
+                    decreasingHeight: false,
+                });
+                break;
+
+            case 'cardview_remove':
+                this.props.removeSelf();
+                break;
+
+            default: 
+                break;
+        }
+    }
+
+    close() {
         this.setState({
-            shrunk: false,
-        });
+            leaving: true,
+        })
     }
 
     render() {
@@ -73,7 +105,7 @@ export default class CardView extends React.Component {
             <div>
                 <div
                     onMouseOver={this.startLoading.bind(this)} onMouseLeave={this.stopLoading.bind(this)} onMouseMove={this.removeLoadingIfOnCloseButton.bind(this)}
-                    className={"CardView CardView_shrunk"}
+                    className={"CardView CardView_shrunk "+((this.state.leaving) ? "CardView_leave" : "")}
                     onAnimationEnd={this.animationEnd.bind(this)}
                     style={{
                         "animationName": animationName,
@@ -88,8 +120,8 @@ export default class CardView extends React.Component {
                         loadingFinished={this.newsLoadingFinished.bind(this)}
                         topAligned="true"
                     ></LoadingBar>
-                    <i className="material-icons close_button">close</i>
-                    <FadedImageView src="https://images.wsj.net/im-131910/social" height="200px"></FadedImageView>
+                    <i className="material-icons close_button" onClick={this.close.bind(this)}>close</i>
+                    <FadedImageView src={this.props.imageSource} height="200px"></FadedImageView>
                     <LoadingBar
                         reset={!this.state.loadingToShowNews}
                         loading={this.state.loadingToShowNews}

@@ -1,5 +1,10 @@
+body {
+  overflow: hidden;
+}
+
 .App {
   text-align: center;
+  overflow: hidden;
 }
 
 .App-logo {
@@ -40,17 +45,14 @@
 }
 
 .CardView {
-  /* background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 60%,rgba(150,150,150,1) 100%); */
   border: 0.2px solid #aaa;
   cursor: pointer;
   box-shadow: 2px 2px 5px grey;
-  /* padding: 10px; */
   margin: 20px;
   display: inline-block;
   cursor: default;
   transition: all 0.1s;
   position: relative;
-  /* color: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(0,255,255,1) 82%,rgba(255,255,255,1) 100%) */
 }
 
 .CardView div {
@@ -80,11 +82,14 @@
 }
 
 .CardView_shrunk p {
-  margin: 20px 60px;
+  margin-top: 20px;
+  margin-right: 60px;
+  margin-left: 60px;
+  margin-bottom: 60px;
   font-size: 1.1em;
   font-family: 'Ubuntu', sans-serif;
   text-align: left;
-  max-height: 350px;
+  max-height: 150px;
   overflow: hidden;
 }
 
@@ -92,18 +97,13 @@
   box-shadow: 5px 5px 5px grey;
 }
 
-.cardview_remove {
-  animation-name: cardview-remove;
-
-}
-
 @keyframes cardview_remove {
   from {
-    
+    transform: translateX(0%);
   }
 
   to {
-    left: 200px;
+    transform: translateX(200%);
   }
 }
 
@@ -188,4 +188,166 @@
   height: 100%;
   text-align: center;
   top: 20%;
+}
+
+
+.CardView_leave {
+  animation-name: cardview_remove;
+  animation-duration: 1s;
+  animation-timing-function: cubic-bezier(0.38, -0.58, 0.02, 0.9);
+  animation-fill-mode: forwards;
+}
+
+.SearchContainer {
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  width: 100%;
+  background-position: center center;
+  background: url('https://res.cloudinary.com/dkb1nvu7q/image/upload/v1575471830/Bacevich-podcast.jpg');
+  box-shadow: 2px 2px 8px #444;
+}
+
+.SearchContainerHeading1Small{
+  font-family: 'Ubuntu', sans-serif;
+  display: inline-block;
+  margin: 12px;
+  padding: 8px;
+  font-size: 1.3em;
+  left: 0;
+  position: relative;
+  text-align: left;
+  background: rgba(200, 200, 200, 0.7);
+  border: 0.5px solid black;
+}
+
+.SearchContainerHeadingsSmallParent{
+  display: inline-block;
+  width: 100%;
+  color: #252525;
+  text-align: center;
+  animation-name: fade_in;
+  animation-duration: 2s;
+}
+
+.SearchContainerHeading1{
+  font-family: 'Ubuntu', sans-serif;
+  display: inline-block;
+  font-size: 4.6em;
+}
+
+.SearchContainerHeading2{
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 1.8em;
+  margin-top: 12px;
+  text-align: center;
+  position: relative;
+  top: 5%;
+}
+
+.SearchContainerHeadingsGrandParent{
+  position: absolute;
+  width: 100%;
+  top: 22.5%;
+  text-align: center;
+}
+
+.SearchContainerHeadingsParent{
+  text-align: center;
+  display: inline-block;
+  padding: 30px;
+  color: #252525;
+  background: rgba(200, 200, 200, 0.7);
+  box-shadow: 2px 2px 12px #444;
+}
+
+.SearchField {
+  top: 60%;
+  position: relative;
+}
+
+.SearchField input {
+  width: 50%;
+  height: 45px;
+  box-shadow: 2px 2px 8px #444;
+  border-radius: 45px;
+  border: 0.6px solid #666;
+  opacity: 0.8;
+  font-size: 1.2em;
+  padding-left: 20px;
+  color: #444;
+  outline: none;
+}
+
+@keyframes decrease_opacity {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
+
+@keyframes increase_opacity {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
+
+.decrease_height_search_container {
+  animation-name: decrease_height_search_container_animation;
+  animation-duration: 2s;
+  animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation-fill-mode: forwards;
+}
+
+@keyframes decrease_height_search_container_animation {
+  from {
+    height: 100vh;
+  }
+
+  to {
+    height: 6vh;
+  }
+}
+
+.fade_out_search_field {
+  animation-name: fade_out;
+  animation-duration: 1s;
+  animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation-fill-mode: forwards;
+}
+
+.fade_out_headings {
+  animation-name: fade_out;
+  animation-duration: 1s;
+  animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation-fill-mode: forwards;
+}
+
+@keyframes fade_out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fade_in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.NewsContainer {
+  margin-top: 20px
 }

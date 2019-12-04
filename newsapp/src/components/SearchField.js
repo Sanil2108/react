@@ -22,11 +22,19 @@ export default class SearchField extends React.Component {
         })
     }
 
+    keyPressed(event) {
+        if (event.key === 'Enter') {
+            this.props.searchFunction(event.target.value);
+            this.setState({
+                hide: true,
+            })
+        }
+    }
+
     render() {
         return (
-            <div>
-                <input type="text" onChange={this.textFieldChange.bind(this)}></input>
-                <button onClick={this.searchButtonClick.bind(this)}>Search</button>
+            <div className={"SearchField " + ((this.state.hide) ? "fade_out_search_field" : "")}>
+                <input type="text" onChange={this.textFieldChange.bind(this)} onKeyDown={this.keyPressed.bind(this)}></input>
             </div>
         )
     }
