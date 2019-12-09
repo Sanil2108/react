@@ -4,11 +4,30 @@ import './App.css';
 import NewsContainer from './components/NewsContainer';
 import SearchContainer from './components/SearchContainer';
 
+import * as axios from 'axios';
 
 export default class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+      allArticles: null,
+    }
+  }
   
-  searchFunction (text) {
-    console.log("Search clicked "+text)
+  searchFunction (searchText) {
+    const scope = this;
+    axios.get(`https://newsapi.org/v2/everything?q=${searchText}&sortBy=publishedAt&apiKey=d9157c5d499b4d8cb6138354c90253f8`).then(
+      (response)=>{
+        console.log(response.data.articles)
+        scope.setState({
+          allArticles: response.data.articles,
+        })
+      },
+    ).catch(
+      (error)=>{console.log("Error - "+error)}
+    )
   }
 
   render() {
@@ -17,7 +36,7 @@ export default class App extends React.Component {
         <SearchContainer searchFunction={this.searchFunction.bind(this)}>
           
         </SearchContainer>
-        <NewsContainer>
+        <NewsContainer allArticles={this.state.allArticles}>
   
         </NewsContainer>
       </div>

@@ -80,6 +80,9 @@ export default class CardView extends React.Component {
 
             case 'cardview_remove':
                 this.props.removeSelf();
+                this.setState({
+                    removed: true,
+                })
                 break;
 
             default: 
@@ -102,7 +105,7 @@ export default class CardView extends React.Component {
             animationName = "cardview_shrink";
         }
         return (
-            <div>
+            <div className={(this.state.removed) ? "CardView_reduce" : ""}>
                 <div
                     onMouseOver={this.startLoading.bind(this)} onMouseLeave={this.stopLoading.bind(this)} onMouseMove={this.removeLoadingIfOnCloseButton.bind(this)}
                     className={"CardView CardView_shrunk "+((this.state.leaving) ? "CardView_leave" : "")}
@@ -132,22 +135,14 @@ export default class CardView extends React.Component {
                         "visibility": (this.state.shrunk) ? "hidden" : "visible",
                         "position": (this.state.shrunk) ? "fixed" : "relative",
                     }}>
-                    "Rs 4.71 lakh crore debt" on the state. Patil's comments came two days after Chief Minister Uddhav Thackeray ordered a review of all on-going development projects in the state, including the Mumbai-Ahmedabad bullet train.
-
-"The state's debt is Rs 4.71 lakh crore. The debt for ongoing projects is Rs two lakh crore. We are reviewing which projects are important for the state's development and whether projects like bullet train can be taken up at a later stage," Patil told a television channel.
-
-"We have called a meeting to look into the viability of the project and how much money will the state government need to repay," he said.
-
-The bullet train project has faced stiff opposition from farmers and tribals whose lands are to be acquired.
-
-Patil also said that people were "not happy" with the previous government's loan waiver scheme.
-
-"We are working on how to provide relief to farmers affected by unseasonal rains and floods," he added.
+                        {this.props.children}
                     </p>
 
 
                     <div className="child" onClick={()=>{window.open(this.props.url, '_blank')}}>
-                        {this.props.children}
+                        <h2>
+                            {this.props.title}
+                        </h2>
                     </div>
                 </div>
             </div>

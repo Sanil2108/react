@@ -211,7 +211,7 @@ body {
 .SearchContainerHeading1Small{
   font-family: 'Ubuntu', sans-serif;
   display: inline-block;
-  margin: 12px;
+  margin: 8px;
   padding: 8px;
   font-size: 1.3em;
   left: 0;
@@ -262,7 +262,7 @@ body {
 }
 
 .SearchField {
-  top: 60%;
+  top: 50%;
   position: relative;
 }
 
@@ -350,4 +350,9 @@ body {
 
 .NewsContainer {
   margin-top: 20px
+}
+
+.CardView_reduce {
+  transition: height 1s;
+  height: 0px;
 }
