@@ -6,7 +6,8 @@ export default class SearchField extends React.Component {
         super(props)
 
         this.state = {
-            currentSearchText: ""
+            currentSearchText: "",
+            hide: (props.hide == undefined ? false : props.hide)
         }
     }
 
@@ -29,6 +30,12 @@ export default class SearchField extends React.Component {
                 hide: true,
             })
         }
+    }
+
+    componentWillReceiveProps(newProps) {
+        this.setState({
+            hide: (newProps.hide == undefined ? false : newProps.hide)
+        });
     }
 
     render() {

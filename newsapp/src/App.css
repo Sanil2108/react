@@ -223,6 +223,7 @@ body {
 
 .SearchContainerHeadingsSmallParent{
   display: inline-block;
+  cursor: pointer;
   width: 100%;
   color: #252525;
   text-align: center;
@@ -297,6 +298,13 @@ body {
   }
 }
 
+.increase_height_search_container {
+  animation-name: increase_height_search_container_animation;
+  animation-duration: 2s;
+  animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation-fill-mode: forwards;
+}
+
 .decrease_height_search_container {
   animation-name: decrease_height_search_container_animation;
   animation-duration: 2s;
@@ -312,6 +320,30 @@ body {
   to {
     height: 6vh;
   }
+}
+
+@keyframes increase_height_search_container_animation {
+  from {
+    height: 6vh;
+  }
+
+  to {
+    height: 100vh;
+  }
+}
+
+.fade_in_search_field {
+  animation-name: fade_in;
+  animation-duration: 1s;
+  animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation-fill-mode: forwards;
+}
+
+.fade_in_headings {
+  animation-name: fade_in;
+  animation-duration: 1s;
+  animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation-fill-mode: forwards;
 }
 
 .fade_out_search_field {

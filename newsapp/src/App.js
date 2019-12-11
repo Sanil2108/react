@@ -1,8 +1,9 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import NewsContainer from './components/NewsContainer';
 import SearchContainer from './components/SearchContainer';
+
+import { Scrollbars } from 'react-custom-scrollbars';
 
 import * as axios from 'axios';
 
@@ -32,14 +33,16 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <SearchContainer searchFunction={this.searchFunction.bind(this)}>
-          
-        </SearchContainer>
-        <NewsContainer allArticles={this.state.allArticles}>
-  
-        </NewsContainer>
-      </div>
+      <Scrollbars style={{ width: "100vw", height: "100vh" }}>
+        <div className="App">
+          <SearchContainer searchFunction={this.searchFunction.bind(this)}>
+            
+          </SearchContainer>
+          <NewsContainer allArticles={this.state.allArticles}>
+    
+          </NewsContainer>
+        </div>
+      </Scrollbars>
     );
   }
 }

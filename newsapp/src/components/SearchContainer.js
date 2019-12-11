@@ -16,6 +16,7 @@ export default class SearchContainer extends React.Component {
             currentHeading2TextLetterCounter: 0,
             deleting: false,
             sleepingFrames: 0,
+            reset: true,
         }
 
         this.heading2Texts = [
@@ -88,24 +89,63 @@ export default class SearchContainer extends React.Component {
     }
 
     animationCompleted(event) {
+        switch(event.animationName) {
+            case "fade_out":
+                this.setState({
+                    showSmallHeading: true,
+                });
+                break;
+            case "increase_height_search_container_animation":
+                this.setState({
+                    reset: true,
+                });
+                break;
+            default:
+                // Do noting
+        }
+    }
+
+    reset(event) {
         this.setState({
-            showSmallHeading: true,
+            expand: true,
+            showSmallHeading: false,
         })
     }
 
     render() {
+        let searchContainerGrandParentHeadingsClass = "";
+        if (this.state.shrink) {
+            searchContainerGrandParentHeadingsClass = "fade_out_headings";
+        }
+        if (this.state.expand) {
+            searchContainerGrandParentHeadingsClass = "fade_in_headings";
+        }
+
+        let searchContainerClass = "";
+        if (this.state.shrink) {
+            searchContainerClass = "decrease_height_search_container";
+        }
+        if (this.state.expand) {
+            searchContainerClass = "increase_height_search_container";
+        }
+
+        let showSearchBar = false;
+        if (this.state.reset) {
+            showSearchBar = true;
+        }
+
         return (
-            <div className={"SearchContainer " + ((this.state.shrink) ? "decrease_height_search_container" : "")} onAnimationEnd={this.animationCompleted.bind(this)}>
-                {((this.state.showSmallHeading) ? (<div className="SearchContainerHeadingsSmallParent">
+            <div className={"SearchContainer " + searchContainerClass} onAnimationEnd={this.animationCompleted.bind(this)}>
+                {((this.state.showSmallHeading) ? (<div className="SearchContainerHeadingsSmallParent" onClick={this.reset.bind(this)}>
                     <div className="SearchContainerHeading1Small">What's happening?</div>
                 </div>) : "")}
-                <div className={"SearchContainerHeadingsGrandParent " + ((this.state.shrink) ? "fade_out_headings" : "")}>
+                <div className={"SearchContainerHeadingsGrandParent " + searchContainerGrandParentHeadingsClass}>
                     <div className="SearchContainerHeadingsParent">
                         <div className="SearchContainerHeading1">What's happening?</div>
                         <div className="SearchContainerHeading2">Because {this.state.currentHeading2Text}</div>
                     </div>
                 </div>
-                <SearchField searchFunction={this.searchFunction.bind(this)}></SearchField>
+                <SearchField hide={showSearchBar} searchFunction={this.searchFunction.bind(this)}></SearchField>
             </div>
         )
     }
