@@ -145,7 +145,7 @@ export default class SearchContainer extends React.Component {
                         <div className="SearchContainerHeading2">Because {this.state.currentHeading2Text}</div>
                     </div>
                 </div>
-                <SearchField hide={showSearchBar} searchFunction={this.searchFunction.bind(this)}></SearchField>
+                <SearchField hide={!this.state.reset} searchFunction={this.searchFunction.bind(this)}></SearchField>
             </div>
         )
     }
