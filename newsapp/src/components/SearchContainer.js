@@ -1,9 +1,6 @@
 import React from 'react';
 import SearchField from './SearchField';
-
-const SLEEP_FRAMES_AFTER_COMPLETING = 10;
-const WRITING_CHARS_SPEED = 80;
-const DELETING_CHARS_SPEED = 30;
+import TypingText from './TypingText';
 
 export default class SearchContainer extends React.Component {
 
@@ -11,15 +8,10 @@ export default class SearchContainer extends React.Component {
         super(props)
 
         this.state = {
-            currentHeading2Text: "",
-            currentHeading2TextLineCounter: 0,
-            currentHeading2TextLetterCounter: 0,
-            deleting: false,
-            sleepingFrames: 0,
-            reset: true,
+            shrunk: true,
         }
 
-        this.heading2Texts = [
+        this.subheadingTexts = [
             "you need to know",
             "it is important",
             "it affects you",
@@ -28,63 +20,38 @@ export default class SearchContainer extends React.Component {
         ]
     }
 
-    updateHeading2() {
-        if (!this.state.deleting) {
-            if (this.state.currentHeading2Text.length === this.heading2Texts[this.state.currentHeading2TextLineCounter].length) {
-                if (this.state.sleepingFrames < SLEEP_FRAMES_AFTER_COMPLETING) {
-                    this.setState({
-                        sleepingFrames: this.state.sleepingFrames + 1,
-                    })
-                }
-                else {
-                    this.setState({
-                        deleting: true,
-                    });
-                    clearInterval(this.state.updateHeadingIntervalId);
-                    this.setState({
-                        updateHeadingIntervalId: setInterval(this.updateHeading2.bind(this), DELETING_CHARS_SPEED),
-                        sleepingFrames: 0,
-                    });
-                }
-                return;
-            }
-
-            this.setState({
-                currentHeading2Text: this.state.currentHeading2Text +
-                    this.heading2Texts[this.state.currentHeading2TextLineCounter][this.state.currentHeading2TextLetterCounter],
-                currentHeading2TextLetterCounter: this.state.currentHeading2TextLetterCounter + 1,
-            });
-        }
-        else {
-            if (this.state.currentHeading2Text.length === 0) {
-                this.setState({
-                    currentHeading2TextLineCounter: (this.state.currentHeading2TextLineCounter + 1 === this.heading2Texts.length) ? 0 : this.state.currentHeading2TextLineCounter + 1,
-                    currentHeading2TextLetterCounter: 0,
-                    deleting: false,
-                });
-                clearInterval(this.state.updateHeadingIntervalId);
-                this.setState({
-                    updateHeadingIntervalId: setInterval(this.updateHeading2.bind(this), WRITING_CHARS_SPEED)
-                });
-                return;
-            }
-
-            this.setState({
-                currentHeading2Text: this.state.currentHeading2Text.slice(0, this.state.currentHeading2Text.length - 1),
-            });
-        }
+    searchFunction(event) {
+        this.props.searchFunction(event);
+        this.startShrinking();
     }
 
-    componentDidMount() {
+    startShrinking() {
+        if (this.state.expanding) {
+            this.stopExpanding();
+        }
         this.setState({
-            updateHeadingIntervalId: setInterval(this.updateHeading2.bind(this), WRITING_CHARS_SPEED)
+            shrinking: true,
         });
     }
 
-    searchFunction(event) {
-        this.props.searchFunction(event);
+    stopShrinking() {
         this.setState({
-            shrink: true,
+            shrinking: false,
+        });
+    }
+
+    startExpanding() {
+        if (this.state.shrinking) {
+            this.stopShrinking();
+        }
+        this.setState({
+            expanding: true,
+        });
+    }
+
+    stopExpanding() {
+        this.setState({
+            expanding: false,
         });
     }
 
@@ -107,31 +74,26 @@ export default class SearchContainer extends React.Component {
 
     reset(event) {
         this.setState({
-            expand: true,
+            expanding: true,
             showSmallHeading: false,
         })
     }
 
     render() {
         let searchContainerGrandParentHeadingsClass = "";
-        if (this.state.shrink) {
+        if (this.state.shrinking) {
             searchContainerGrandParentHeadingsClass = "fade_out_headings";
         }
-        if (this.state.expand) {
+        if (this.state.expanding) {
             searchContainerGrandParentHeadingsClass = "fade_in_headings";
         }
 
         let searchContainerClass = "";
-        if (this.state.shrink) {
+        if (this.state.shrinking) {
             searchContainerClass = "decrease_height_search_container";
         }
-        if (this.state.expand) {
+        if (this.state.expanding) {
             searchContainerClass = "increase_height_search_container";
-        }
-
-        let showSearchBar = false;
-        if (this.state.reset) {
-            showSearchBar = true;
         }
 
         return (
@@ -142,10 +104,10 @@ export default class SearchContainer extends React.Component {
                 <div className={"SearchContainerHeadingsGrandParent " + searchContainerGrandParentHeadingsClass}>
                     <div className="SearchContainerHeadingsParent">
                         <div className="SearchContainerHeading1">What's happening?</div>
-                        <div className="SearchContainerHeading2">Because {this.state.currentHeading2Text}</div>
+                        <TypingText pretext={"Because "} texts={this.subheadingTexts}></TypingText>
                     </div>
                 </div>
-                <SearchField hide={!this.state.reset} searchFunction={this.searchFunction.bind(this)}></SearchField>
+                <SearchField hide={this.state.shrunk} searchFunction={this.searchFunction.bind(this)}></SearchField>
             </div>
         )
     }
