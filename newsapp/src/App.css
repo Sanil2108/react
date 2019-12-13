@@ -4,7 +4,7 @@ body {
 
 .App {
   text-align: center;
-  overflow: hidden;
+  height: 100vh;
 }
 
 .App-logo {
@@ -201,10 +201,9 @@ body {
 .SearchContainer {
   height: 100vh;
   background-repeat: no-repeat;
-  background-attachment: fixed;
   width: 100%;
-  background-position: center center;
-  background: url('https://res.cloudinary.com/dkb1nvu7q/image/upload/v1575471830/Bacevich-podcast.jpg');
+  background-position: center;
+  background-size: cover;
   box-shadow: 2px 2px 8px #444;
 }
 
@@ -298,21 +297,21 @@ body {
   }
 }
 
-.increase_height_search_container {
-  animation-name: increase_height_search_container_animation;
+.increase_height_search_container_anim {
+  animation-name: increase_height_search_container_anim;
   animation-duration: 2s;
   animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
   animation-fill-mode: forwards;
 }
 
-.decrease_height_search_container {
-  animation-name: decrease_height_search_container_animation;
+.decrease_height_search_container_anim {
+  animation-name: decrease_height_search_container_anim;
   animation-duration: 2s;
   animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
   animation-fill-mode: forwards;
 }
 
-@keyframes decrease_height_search_container_animation {
+@keyframes decrease_height_search_container_anim {
   from {
     height: 100vh;
   }
@@ -322,7 +321,7 @@ body {
   }
 }
 
-@keyframes increase_height_search_container_animation {
+@keyframes increase_height_search_container_anim {
   from {
     height: 6vh;
   }

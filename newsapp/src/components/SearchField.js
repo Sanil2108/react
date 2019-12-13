@@ -7,7 +7,6 @@ export default class SearchField extends React.Component {
 
         this.state = {
             currentSearchText: "",
-            hide: (props.hide == undefined ? false : props.hide)
         }
     }
 
@@ -39,8 +38,16 @@ export default class SearchField extends React.Component {
     }
 
     render() {
+        let className = "";
+        if (this.props.hide) {
+            className = "fade_out_search_field";
+        }
+        else if (this.props.show) {
+            className = "fade_in_search_field";
+        }
+
         return (
-            <div className={"SearchField " + ((this.state.hide) ? "fade_out_search_field" : "")}>
+            <div className={"SearchField " + className}>
                 <input type="text" onChange={this.textFieldChange.bind(this)} onKeyDown={this.keyPressed.bind(this)}></input>
             </div>
         )

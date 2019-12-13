@@ -8,7 +8,7 @@ export default class SearchContainer extends React.Component {
         super(props)
 
         this.state = {
-            shrunk: true,
+            shrunk: false,
         }
 
         this.subheadingTexts = [
@@ -17,7 +17,15 @@ export default class SearchContainer extends React.Component {
             "it affects you",
             "it will change things",
             "you need to act",
-        ]
+        ];
+
+        let backgroundImageURLs = [
+            'https://www.lowyinstitute.org/sites/default/files/20090428adf8185016_0020.jpg',
+            'https://www.thenation.com/wp-content/uploads/2019/01/afghanistan-us-soldiers-logar-rtr-img.jpg',
+            'https://res.cloudinary.com/dkb1nvu7q/image/upload/v1575471830/Bacevich-podcast.jpg',
+            'https://www.thenation.com/wp-content/uploads/2019/12/donald-rumsfeld-tommy-franks-congress-ap-img.jpg'
+        ];
+        this.imageURL = backgroundImageURLs[parseInt(Math.random() * (backgroundImageURLs.length))];
     }
 
     searchFunction(event) {
@@ -57,26 +65,19 @@ export default class SearchContainer extends React.Component {
 
     animationCompleted(event) {
         switch(event.animationName) {
-            case "fade_out":
+            case 'decrease_height_search_container_anim':
                 this.setState({
-                    showSmallHeading: true,
+                    shrunk: true,
                 });
                 break;
-            case "increase_height_search_container_animation":
+            case 'increase_height_search_container_anim':
                 this.setState({
-                    reset: true,
+                    shrunk: false,
                 });
                 break;
             default:
                 // Do noting
         }
-    }
-
-    reset(event) {
-        this.setState({
-            expanding: true,
-            showSmallHeading: false,
-        })
     }
 
     render() {
@@ -90,15 +91,21 @@ export default class SearchContainer extends React.Component {
 
         let searchContainerClass = "";
         if (this.state.shrinking) {
-            searchContainerClass = "decrease_height_search_container";
+            searchContainerClass = "decrease_height_search_container_anim";
         }
         if (this.state.expanding) {
-            searchContainerClass = "increase_height_search_container";
+            searchContainerClass = "increase_height_search_container_anim";
         }
 
         return (
-            <div className={"SearchContainer " + searchContainerClass} onAnimationEnd={this.animationCompleted.bind(this)}>
-                {((this.state.showSmallHeading) ? (<div className="SearchContainerHeadingsSmallParent" onClick={this.reset.bind(this)}>
+            <div
+                className={"SearchContainer " + searchContainerClass}
+                onAnimationEnd={this.animationCompleted.bind(this)}
+                style = {{
+                    'background-image': 'url(\'' + this.imageURL + '\')',
+                }}
+            >
+                {(((this.state.shrinking || this.state.shrunk) && !this.state.expanding) ? (<div className="SearchContainerHeadingsSmallParent" onClick={this.startExpanding.bind(this)}>
                     <div className="SearchContainerHeading1Small">What's happening?</div>
                 </div>) : "")}
                 <div className={"SearchContainerHeadingsGrandParent " + searchContainerGrandParentHeadingsClass}>
@@ -107,7 +114,11 @@ export default class SearchContainer extends React.Component {
                         <TypingText pretext={"Because "} texts={this.subheadingTexts}></TypingText>
                     </div>
                 </div>
-                <SearchField hide={this.state.shrunk} searchFunction={this.searchFunction.bind(this)}></SearchField>
+                <SearchField
+                    show={this.state.expanding || !this.state.shrunk}
+                    hide={(this.state.shrinking || this.state.shrunk) && !this.state.expanding}
+                    searchFunction={this.searchFunction.bind(this)}
+                ></SearchField>
             </div>
         )
     }
