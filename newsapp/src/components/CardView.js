@@ -29,7 +29,6 @@ export default class CardView extends React.Component {
 
     startLoading() {
         if (!this.state.loadingToShowNews && this.state.shrunk) {
-            console.log("Starting loading", this.state.loadingToShowNews)
             this.setState({
                 loadingToShowNews: true,
                 loadingToHideNews: false,

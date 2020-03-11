@@ -15,7 +15,6 @@ export default class NewsContainer extends React.Component {
     }
 
     removeCard(id) {
-        console.log("Removing card " + id);
     }
 
     render() {

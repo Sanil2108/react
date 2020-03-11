@@ -15,7 +15,6 @@ export default class RotateButton extends React.Component {
             const scope = this;
             this.intervalId = setInterval(
                 function temp() {
-                    console.log( (scope.props.rotationAngle / (scope.props.time * 1000 / 16)))
                     const newRotationAngle = scope.state.rotationAngle + (scope.props.rotationAngle / (scope.props.time * 1000 / 16))
                     if (newRotationAngle >= scope.props.rotationAngle) {
                         scope.setState({

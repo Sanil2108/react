@@ -21,7 +21,6 @@ export default class App extends React.Component {
     const scope = this;
     axios.get(`https://newsapi.org/v2/everything?q=${searchText}&sortBy=publishedAt&apiKey=d9157c5d499b4d8cb6138354c90253f8`).then(
       (response)=>{
-        console.log(response.data.articles)
         scope.setState({
           allArticles: response.data.articles,
         })
@@ -33,7 +32,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <Scrollbars style={{ width: "100vw", height: "100vh" }}>
+      <Scrollbars id="scrollbars" style={{ width: "100vw", height: "100vh" }}>
         <div className="App">
           <SearchContainer searchFunction={this.searchFunction.bind(this)}>
             
