@@ -1,5 +1,8 @@
 import * as React from 'react';
 
+const WIDTH_SPEED_INTENSITY = 60;
+const INITIAL_WIDTH_SPEED = 6;
+
 export default class LoadingBar extends React.Component {
     loadingFinished () {
         this.props.loadingFinished();
@@ -27,8 +30,8 @@ class LoadingCenter extends React.Component {
 
         this.state = {
             currentCounter: 1,
-            initialWidthSpeed: 6,
-            widthSpeedIntensity: 5,
+            initialWidthSpeed: INITIAL_WIDTH_SPEED,
+            widthSpeedIntensity: WIDTH_SPEED_INTENSITY,
             fps: 60,
             width: 0,
             loading: false,
@@ -72,8 +75,8 @@ class LoadingCenter extends React.Component {
             this.setState({
                 reset: true,
                 currentCounter: 1,
-                initialWidthSpeed: 6,
-                widthSpeedIntensity: 4.4,
+                initialWidthSpeed: INITIAL_WIDTH_SPEED,
+                widthSpeedIntensity: WIDTH_SPEED_INTENSITY,
                 fps: 60,
                 width: 0,
                 loading: false,

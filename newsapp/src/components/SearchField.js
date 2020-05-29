@@ -33,7 +33,7 @@ export default class SearchField extends React.Component {
 
     componentWillReceiveProps(newProps) {
         this.setState({
-            hide: (newProps.hide == undefined ? false : newProps.hide)
+            hide: ((newProps.hide === undefined || newProps.hide === null) ? false : newProps.hide)
         });
     }
 

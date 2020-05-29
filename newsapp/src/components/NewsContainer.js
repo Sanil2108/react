@@ -1,7 +1,6 @@
 import React from 'react';
 
 import CardView from './CardView';
-import LoadingBar from './LoadingBar';
 
 export default class NewsContainer extends React.Component {
 
