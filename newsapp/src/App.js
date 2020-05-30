@@ -19,7 +19,7 @@ export default class App extends React.Component {
   
   searchFunction (searchText) {
     const scope = this;
-    axios.get(`https://newsapi.org/v2/everything?q=${searchText}&sortBy=publishedAt&apiKey=d9157c5d499b4d8cb6138354c90253f8`).then(
+    axios.get(`https://gnews.io/api/v3/search?q=${searchText}&token=1edb94c6e06e6492ba8f7f9654245feb`).then(
       (response)=>{
         scope.setState({
           allArticles: response.data.articles,

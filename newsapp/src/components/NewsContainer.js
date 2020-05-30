@@ -22,7 +22,7 @@ export default class NewsContainer extends React.Component {
             for (let i=0; i < this.props.allArticles.length; i += 1) {
                 const currentArticle = this.props.allArticles[i];
                 allArticlesDiv.push(
-                    <CardView width="50%" url={currentArticle.url} maxHeight="600" height="200" title={currentArticle.title} imageSource={currentArticle.urlToImage} removeSelf={this.removeCard.bind(this, 0)}>
+                    <CardView width="50%" url={currentArticle.url} maxHeight="600" height="200" title={currentArticle.title} imageSource={currentArticle.image} removeSelf={this.removeCard.bind(this, 0)}>
                         {currentArticle.description}
                     </CardView>
                 )
