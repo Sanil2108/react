@@ -106,7 +106,7 @@ export default class SearchContainer extends React.Component {
                 }}
             >
                 {(((this.state.shrinking || this.state.shrunk) && !this.state.expanding) ? (<div className="SearchContainerHeadingsSmallParent" onClick={this.startExpanding.bind(this)}>
-                    <div className="SearchContainerHeading1Small">What's happening?</div>
+                    <div className="SearchContainerHeading1Small">What's happening</div>
                 </div>) : "")}
                 <div className={"SearchContainerHeadingsGrandParent " + searchContainerGrandParentHeadingsClass}>
                     <div className="SearchContainerHeadingsParent">
