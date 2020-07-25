@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import Radium from 'radium';
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -21,12 +19,6 @@ class App extends Component {
       display: 'inline-block',
       transition: 'all 1s',
       transform: (this.state.hovered) ? 'scale(1.2)' : 'none',
-      ':hover': {
-        backgroundColor: 'red',
-      },
-      '@media (min-width: 500px)': {
-        backgroundColor: 'green'
-      }
     }
 
     return (
@@ -41,4 +33,4 @@ class App extends Component {
   }
 }
 
-export default Radium(App);
+export default App;
