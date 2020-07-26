@@ -3,13 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ErrorBoundary>
-      <App />
-    </ErrorBoundary>
+    <App title="I am an application" />
   </React.StrictMode>,
   document.getElementById('root')
 );

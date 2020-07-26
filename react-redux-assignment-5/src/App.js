@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.css';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
   constructor(props) {
@@ -8,6 +9,11 @@ class App extends Component {
     this.state = {
       hovered: false,
     }
+  }
+
+  temp() {
+    const a = 4;
+    console.log(a + 1);
   }
 
   render() {
@@ -21,10 +27,16 @@ class App extends Component {
       transform: (this.state.hovered) ? 'scale(1.2)' : 'none',
     }
 
+    this.temp()
+
+    if (Math.random() > 0.7) {
+      return this.temp.a.a.a.a();
+    }
+
     return (
-      <div className="App">
+      <div className={classes.App} >
         <div
-          onMouseOver={() => this.setState({ hovered: true })}
+          onMouseOver={() => { this.temp(); this.setState({ hovered: true }) }}
           onMouseOut={() => this.setState({ hovered: false })}
           style={style}
         >Hello world</div>
