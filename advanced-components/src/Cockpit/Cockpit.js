@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 
 function Cockpit(props) {
-    useEffect(() => console.log("HELLOSSSSS"))
+    // useEffect(() => {
+    //     console.log("HELLOSSSSS")
+    // })
+
+    console.log("Running cockpit");
 
     return (
         <div>
@@ -14,4 +18,4 @@ function Cockpit(props) {
     )
 }
 
-export default Cockpit;
+export default React.memo(Cockpit);

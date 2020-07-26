@@ -9,38 +9,40 @@ class App extends Component {
 
     this.state = {
       persons: [
-        { name: 'Sanil', age: '21' },
-        { name: 'Pi', age: '100' },
-        { name: 'Pi', age: '100000' },
-        { name: 'HELLLLOOOO', age: '100000' },
+        { name: 'Sanil', age: 21 },
+        { name: 'Pi', age: 100 },
+        { name: 'Pi', age: 100000 },
+        { name: 'HELLLLOOOO', age: 100000 },
       ],
       showPeople: true,
+      showCockpit: true,
     }
 
-    console.log('In constructor')
+    // console.log('In constructor')
   }
 
   componentDidMount() {
-    console.log('Component did mount');
+    // console.log('Component did mount');
   }
 
   static getDerivedStateFromProps(props, state) {
-    console.log('getDerivedStateFromProps')
+    // console.log('getDerivedStateFromProps')
 
     return state;
   }
 
   render() {
-    console.log('render')
+    // console.log('render')
 
     return (
       <div className="App">
-        <Cockpit
+        <button onClick={ () => { this.setState({ showCockpit: !this.state.showCockpit }); } }>Toggle cockpit</button>
+        {this.state.showCockpit && <Cockpit
           numberOfPeople={this.state.persons.length}
           togglePeople={() => this.setState({ showPeople: !this.state.showPeople })}
           title={this.props.title}
         >
-        </Cockpit>
+        </Cockpit>}
         {this.state.showPeople && <Persons
           persons={this.state.persons}
           removePerson={(idx) => {
