@@ -1,0 +1,12 @@
+.BuildControlsTable {
+    border: 0.5px solid #00000088;
+    display: inline-block;
+    width: 50vw;
+    border-radius: 5px;
+    padding-bottom: 7.5px;
+    box-shadow: 0px 0px 6px 3px #44444455;
+}
+
+.BuildControlsTable * {
+    padding: 7.5px;
+}

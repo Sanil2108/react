@@ -1,12 +1,17 @@
 import React from 'react'
 import classes from './NavBar.css';
 
-function navBar(props) {
+function NavBar(props) {
     return (
         <div className={classes.NavBar}>
-            This is the navbar
+            <span style={{ padding: '10px'}} >Burger Builder</span>
+
+            <span className={classes["NavBar__Button-Container"]}>
+                <button className={classes["NavBar__Button--highlighted"]}>Builder</button>
+                <button className={classes["NavBar__Button"]}>Burgers</button>
+            </span>
         </div>
     );
 }
 
-export default navBar;
+export default NavBar;
