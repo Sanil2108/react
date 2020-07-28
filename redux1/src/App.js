@@ -1,15 +1,10 @@
 import React from 'react';
 import './App.css';
-import { increment, decrement, selectCount } from './store/store';
 
 class App extends React.Component {
   render() {
-    console.log(selectCount);
-
     return (<div>
-      <button onClick={decrement}>Decrement</button>
-      {/* { selectCount } */}
-      <button onClick={increment}>Increment</button>
+      Hello world
     </div>)
   }
 }
