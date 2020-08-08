@@ -1,0 +1,28 @@
+{
+    "users": [
+        {
+            "id": "sanilk",
+            "name": "Sanil",
+            "email": "sanilkhurana7@gmail.com",
+            "password": "root",
+            "lists": [
+                {
+                    "name": "Complete React",
+                    "items": [
+                        { "name": "Look into some docs", "done": true },
+                        { "name": "Create some stuff", "done": false },
+                        { "name": "Create more stuff", "done": false },
+                        { "name": "Break everything created", "done": false }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "preru",
+            "name": "Prerna",
+            "email": "prerna1998.ps@gmail.com",
+            "password": "Preru1521",
+            "lists": []
+        }
+    ]
+}

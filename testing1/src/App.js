@@ -4,6 +4,8 @@ import './App.css';
 import ProductTable from './ProductTable';
 import HeadingOnlyProductTable from './HeadingOnlyProductTable';
 import ProductSearch from './ProductSearch';
+import RefForwardExampleButton from './RefForwardExampleButton';
+import PropTypeExample from './PropTypeExample';
 
 class App extends React.Component {
     constructor(props) {
@@ -30,9 +32,11 @@ class App extends React.Component {
     }
 
     render() {
+        const someRef = React.createRef();
+
         return (
             <>
-                <ProductSearch filterFunction={this.filterProducts.bind(this)}></ProductSearch>
+                {/* <ProductSearch filterFunction={this.filterProducts.bind(this)}></ProductSearch>
                 <HeadingOnlyProductTable></HeadingOnlyProductTable>
                 <ProductTable
                     title="Sporting Goods"
@@ -43,7 +47,15 @@ class App extends React.Component {
                     title="Electronics"
                     showColumnHeadings={false}
                     rows={this.state.data.filter((product) => product.category === 'Electronics')}
-                ></ProductTable>
+                ></ProductTable> */}
+                <button onClick={() => someRef.current.addEventListener('click', () => alert('This is from the inside... shhh...'))}>This is a button in app.js</button>
+                <RefForwardExampleButton ref={someRef}>
+
+                </RefForwardExampleButton>
+
+                <PropTypeExample>
+
+                </PropTypeExample>
             </>
         );
     }
